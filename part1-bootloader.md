@@ -23,6 +23,13 @@ The user code will be run on the CPU and is therefore compiled for the specific 
 I'm just touching the basic parts here and if you're interested in all the details you can find the boot process explained in more detail at http://elinux.org/RPi_Software or read the latest documentation about the [Raspberry Pi Boot Modes](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bootmodes/).
 
 
+## 32bit or 64bit, Who knows?
+
+The bootloader software from the Raspberry Pi repo is exactly the same to use for 32 and 64bit systems. The hardware will be checked at boot time, so the bootloader knows the correct hardware SOC and if it's capable to run 64bit code or not. Then it tries to load the 64bit kernel only on RPi3. If there's no 64bit kernel it falls back to load a 32bit kernel and so on. Same thing works for ARMv8, ARMv7 and ARMv6 SOCs.
+
+For us this automatic detection is pretty cool, because it just magically works and gives us the flexibility to build a SD card with different kernel version that works on all Pi models from 1, 2, 3, Zero and Zero W.
+
+
 ## Minimum Boot Files
 
 As we learned about the boot process, we do have only a few requirements to successfully boot a Raspberry Pi from a SD card:
